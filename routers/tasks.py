@@ -100,7 +100,6 @@ async def get_task(
 @router.put(
     "/{task_id}",
     summary="Editing tasks by id",
-    status_code=status.HTTP_205_RESET_CONTENT,
 )
 async def put_task(
     task_id: int,

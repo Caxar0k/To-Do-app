@@ -5,9 +5,6 @@ __pycache__/
 # Virtual environment
 .venv
 
-# Environment variables
-.env
-
 # SQLite database
 *.db
 *.sqlite

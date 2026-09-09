@@ -23,7 +23,7 @@ router = APIRouter(
     summary="Create User",
     status_code = status.HTTP_201_CREATED,
 )
-async def create_user(
+async def create(
     data: UserAddSchema,
     session: SessionDep
 ):

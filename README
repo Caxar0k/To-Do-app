@@ -1,0 +1,97 @@
+Installation
+
+1. Clone the repository
+
+git clone https://github.com/zakhar-kontsevyi/To-Do-app.git
+cd To-Do-app
+
+
+2. Environment Variables
+Change secret key in .env file in the project root:
+
+secret_key=change_me
+           ^^^^^^^^^
+
+
+3. Create a virtual environment
+
+python3 -m venv .venv
+source .venv/bin/activate
+
+
+4. Install dependencies
+
+pip install -r requirements.txt
+
+
+---------------------------------------------------------------------------------------------
+
+
+Running the Application
+Start the development server with:
+
+uvicorn main:app --reload
+
+The API will be available at:
+
+http://127.0.0.1:8000
+
+
+Docker
+You need (Docker version 29.6.2 or more) and (Docker Compose version v5.5.1 or more)
+The repository includes a Dockerfile and compose.yaml.
+To start the application using Docker Compose:
+
+docker compose up --build
+
+To run it in the background:
+
+docker compose up -d --build
+
+Stop the containers with:
+
+docker compose down
+
+
+---------------------------------------------------------------------------------------------
+
+
+API Overview
+
+Authentication
+The authentication router is responsible for user registration and login.
+
+Typical flow:
+
+POST /auth/register
+POST /auth/login
+
+
+Tasks
+The task router provides operations for managing user tasks.
+
+Typical operations include:
+
+GET    /tasks
+POST   /tasks
+GET    /tasks/{task_id}
+PUT    /tasks/{task_id}
+DELETE /tasks/{task_id}
+
+Check the Swagger documentation at http://127.0.0.1:8000/docs for the exact endpoint paths, request schemas, and response formats supported by the current version.
+
+
+---------------------------------------------------------------------------------------------
+
+
+Testing
+The project contains a dedicated tests/ directory.
+
+Run the test suite with:
+
+python -m pytest -v
+
+
+
+
+

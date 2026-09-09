@@ -63,8 +63,8 @@ The authentication router is responsible for user registration and login.
 
 Typical flow:
 
-POST /auth/register
-POST /auth/login
+POST /user
+POST /user/login
 
 
 Tasks

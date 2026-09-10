@@ -25,14 +25,30 @@ router = APIRouter(
 )
 async def create(
     data: UserCreateSchema,
-    session: SessionDep
+    session: SessionDep,
 ):
+
+    result = await session.execute(select(UserModel).where(UserModel.username == data.username))
+    unige_test = result.scalar_one_or_none()
+    if unige_test != None:
+        raise HTTPException(
+            status_code= status.HTTP_409_CONFLICT,
+            detail="This username or email already exists",
+        )
+    result = await session.execute(select(UserModel).where(UserModel.email == data.email))
+    unige_test = result.scalar_one_or_none()
+    if unige_test != None:
+        raise HTTPException(
+            status_code= status.HTTP_409_CONFLICT,
+            detail="This username or email already exists",
+        )
     new_user = UserModel(
         username = data.username,
         password_hash = generate_password_hash(data.password),
         email = data.email,
         created_at = date.today(),
     )
+
     session.add(new_user)
     await session.commit()
 

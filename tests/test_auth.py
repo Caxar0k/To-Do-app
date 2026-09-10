@@ -110,3 +110,16 @@ async def test_create_user_username_too_long(client):
     )
 
     assert response.status_code == 422
+
+@pytest.mark.asyncio
+async def test_create_user_with_same_name_and_email(client):
+    await client.post(
+        "/user",
+        json=USER_DATA,
+    )
+    response = await client.post(
+        "/user",
+        json=USER_DATA,
+    )
+
+    assert response.status_code == 409

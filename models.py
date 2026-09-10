@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Mapped, mapped_column 
 from sqlalchemy import ForeignKey 
-
+from datetime import datetime
 from database import Base
 
 
@@ -9,7 +9,7 @@ class UserModel(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True)
     username: Mapped[str] = mapped_column(unique=True) 
-    created_at: Mapped[str]
+    created_at: Mapped[datetime]
     password: Mapped[str] 
     email: Mapped[str] = mapped_column(unique=True) 
 

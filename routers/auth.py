@@ -31,7 +31,7 @@ async def create(
         username = data.username,
         password = generate_password_hash(data.password),
         email = data.email,
-        created_at = str(date.today()),
+        created_at = date.today(),
     )
     session.add(new_user)
     await session.commit()

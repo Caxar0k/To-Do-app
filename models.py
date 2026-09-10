@@ -10,7 +10,7 @@ class UserModel(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     username: Mapped[str] = mapped_column(unique=True) 
     created_at: Mapped[datetime]
-    password: Mapped[str] 
+    password_hash: Mapped[str] 
     email: Mapped[str] = mapped_column(unique=True) 
 
 

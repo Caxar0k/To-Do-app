@@ -13,14 +13,18 @@ class TaskSchema(TaskAddSchema):
 
 
 
-class UserAddSchema(BaseModel):
+class UserCreateSchema(BaseModel):
     username: str = Field(max_length=50)
-    password: str 
+    email: EmailStr
+    password: str = Field(min_length=8,max_length=50)
+
+
+class UserResponseSchema(BaseModel):
+    id: int
+    username: str = Field(max_length=50)
     email: EmailStr
 
-class UserSchema(UserAddSchema):
-    id : int
 
 class UserLoginSchema(BaseModel):
     username: str = Field(max_length=50)
-    password: str = Field(max_length=64)
+    password: str = Field(min_length=8,max_length=50)

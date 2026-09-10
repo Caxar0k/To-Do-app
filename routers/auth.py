@@ -8,7 +8,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from database import get_session
 from models import  UserModel
-from schemas import  UserAddSchema,UserLoginSchema
+from schemas import  UserCreateSchema,UserLoginSchema
 from config import security , config
 
 SessionDep = Annotated[AsyncSession, Depends(get_session)]
@@ -24,12 +24,12 @@ router = APIRouter(
     status_code = status.HTTP_201_CREATED,
 )
 async def create(
-    data: UserAddSchema,
+    data: UserCreateSchema,
     session: SessionDep
 ):
     new_user = UserModel(
         username = data.username,
-        password = generate_password_hash(data.password),
+        password_hash = generate_password_hash(data.password),
         email = data.email,
         created_at = date.today(),
     )
@@ -59,7 +59,7 @@ async def Authorization_user(
             detail="Wrong password or login",
         )
 
-    password_check = check_password_hash(user.password, data.password)
+    password_check = check_password_hash(user.password_hash, data.password)
     if password_check == False:
         raise HTTPException(
             status_code= status.HTTP_401_UNAUTHORIZED,
